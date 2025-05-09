@@ -1,22 +1,10 @@
 .row-layout {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 1rem;
 }
 
 button {
-  position: relative;
   font-size: 1rem;
   padding: 1rem;
-}
-
-@media (max-width: 768px) {
-  .row-layout {
-    flex-direction: column;
-  }
-  button {
-    width: 100%;
-  }
 }
