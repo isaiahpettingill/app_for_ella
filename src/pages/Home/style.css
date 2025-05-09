@@ -1,10 +1,1 @@
-.row-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-button {
-  font-size: 1rem;
-  padding: 1rem;
-}
+/* Add custom styles here */
