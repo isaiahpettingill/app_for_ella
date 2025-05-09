@@ -1,0 +1,2 @@
+* use semicolons
+* use preact > react, but use @preact/compat as necessary
