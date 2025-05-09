@@ -1,7 +1,13 @@
+.row-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
 button {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  position: relative;
   font-size: 1rem;
   padding: 1rem;
 }
