@@ -9,11 +9,11 @@ const adjectives = [
   "amazing", "beautiful", "the best", "kind", "wonderful", "skilled", "powerful", "strong", "gentle", "faithful",
   "brilliant", "charming", "creative", "dazzling", "elegant", "energetic", "fabulous", "glorious", "graceful",
   "impressive", "incredible", "magnificent", "marvelous", "outstanding", "phenomenal", "radiant", "remarkable",
-  "spectacular", "splendid", "superb", "talented", "terrific", "vibrant", "wise", "witty"
+  "spectacular", "splendid", "superb", "talented", "terrific", "vibrant", "wise", "witty", 'cute', 'sweet'
 ];
 
 // Added more heart emojis
-const emojiList = ['💖', '❤️', '💕', '💗', '💓', '💞', '💜', '💙', '💚', '💛', '🤟', '😊', '✨', '🎉', '🤡', '🦄', '🦆', '🥭', '🍓', '🤩', '🌟', '🦦', '🫶'];
+const emojiList = ['💖', '❤️', '💕', '💗', '💓', '💞', '💜', '💙', '💚', '💛', '🤟', '😊', '✨', '☀️', '🌞', '🌈', '💐', '🌷', '🪻', '🎉', '🤡', '🦄', '🦆', '🥭', '🍓', '🤩', '🌟', '🦦', '🫶'];
 const animationClasses = ['adjective-animate', 'adjective-shake', 'adjective-pulse'];
 
 // We no longer need the onNavigateToJamesMode prop with preact-iso
