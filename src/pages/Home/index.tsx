@@ -5,10 +5,11 @@ export function Home() {
 
   return (
     <div class="counter">
-      <h1>Counter: {count}</h1>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <div class="count-display">You have pushed the button this many times:</div>
+      <div class="count-value">{count}</div>
+      <button class="floating-action-button" onClick={() => setCount(count + 1)}>
+        +
+      </button>
     </div>
   );
 }
