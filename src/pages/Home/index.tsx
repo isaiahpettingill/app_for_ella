@@ -1,6 +1,5 @@
 export function Home() {
   return (
-  return (
     <div className="pure-g">
       <header className="pure-u-1">
         <h2>Ella is amazing</h2>
