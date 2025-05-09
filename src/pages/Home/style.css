@@ -1,23 +1,62 @@
+/* Home.css */
+
+/* Make everything pink */
 .home-container {
+  background-color: #ffdae9; /* Lighter pink */
+  color: #c2185b; /* Darker pink/rose */
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Add this to explicitly hide horizontal overflow */
+}
+
+.home-container h1,
+.home-container h2,
+.home-container p,
+.home-container button {
+    color: #c2185b;
+}
+
+
+/* Center the header text */
+.home-container .header {
   text-align: center;
+  padding: 10px 0;
 }
 
-.header {
-  background-color: pink;
-  padding: 1rem;
+/* Style the button to fit the pink theme */
+.home-container .pure-button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Space above the button */
 }
 
-.image-container {
-  padding: 1rem;
+.home-container .pure-button:hover {
+    background-color: #d81b60;
 }
 
-.image-container img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
+/* Center the image container */
+.home-container .image-container {
+  text-align: center; /* Centers inline/inline-block children */
+  margin-bottom: 20px;
 }
 
-.content {
-  padding: 1rem;
+/* --- NEW STYLE FOR THE IMAGE --- */
+.home-container .image-container img {
+  max-width: 100%; /* Ensure the image never exceeds its container's width */
+  height: auto;     /* Maintain aspect ratio */
+  display: block;   /* Treat image as a block element */
+  margin: 0 auto;   /* Center the block image horizontally */
+}
+
+/* Added this rule just in case the specific Ella message div causes issues */
+.home-container div {
+    /* Ensure any nested divs also don't exceed container width */
+    max-width: 100%;
+    box-sizing: border-box; /* Include padding/border in width */
 }

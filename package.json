@@ -7,6 +7,8 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@picocss/pico": "^2.1.1",
+		"canvas-confetti": "^1.9.3",
 		"preact": "^10.25.3",
 		"preact-iso": "^2.9.1"
 	},
