@@ -1,1 +1,23 @@
-/* Add custom styles here */
+.home-container {
+  text-align: center;
+}
+
+.header {
+  background-color: pink;
+  padding: 1rem;
+}
+
+.image-container {
+  padding: 1rem;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 1rem;
+}
