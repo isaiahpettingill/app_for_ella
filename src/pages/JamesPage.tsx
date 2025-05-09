@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'preact/hooks'; // Import useEffect and useRef
 import { route } from 'preact-router'; // Keeping this import for clarity, though preact-iso uses location.href
-import './style.css'; // Assuming shared styles
+import confetti from 'canvas-confetti'; // Import confetti
 
 // Import the actual image files
-import pushupImageSrc from '../../assets/pushup.png'; // Assuming pushup.png is in assets
-import pushdownImageSrc from '../../assets/pushdown.png'; // Assuming pushdown.png is in assets
+import pushupImageSrc from '../assets/pushup.png'; // Assuming pushup.png is in assets
+import pushdownImageSrc from '../assets/pushdown.png'; // Assuming pushdown.png is in assets
 
 export function JamesPage() {
 
@@ -14,6 +14,8 @@ export function JamesPage() {
   const [pushupState, setPushupState] = useState('up'); // Start in the 'up' position
   // State to track if the animation is currently in progress
   const [isAnimating, setIsAnimating] = useState(false); // New state for animation status
+  // State to store the inspirational quote
+  const [quote, setQuote] = useState('');
 
   // Refs to hold the canvas element and the loaded images
   const canvasRef = useRef(null);
@@ -24,6 +26,21 @@ export function JamesPage() {
   const MAX_CANVAS_WIDTH = 600; // You can adjust this value as needed (e.g., 600px)
   // Define the duration of the pushup "down" state
   const ANIMATION_DURATION = 300; // Same as the setTimeout delay
+
+  // Function to fetch a new quote
+  const fetchQuote = () => {
+    fetch('https://api.realinspire.live/v1/quotes/random')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          setQuote(`"${data[0].content}" - ${data[0].author}`);
+        }
+      })
+      .catch(error => {
+        console.error("Failed to fetch quote:", error);
+        setQuote("Keep pushing, you're doing great!"); // Fallback quote for subsequent fetches
+      });
+  };
 
   // Load images when the component mounts
   useEffect(() => {
@@ -40,6 +57,9 @@ export function JamesPage() {
       }
     };
     pushdownImg.current.src = pushdownImageSrc;
+
+    // Fetch initial inspirational quote
+    fetchQuote();
 
     // Handle window resize to redraw canvas
     const handleResize = () => {
@@ -98,7 +118,22 @@ export function JamesPage() {
     setIsAnimating(true);
 
     // Increment the pushup count
-    setPushupCount(pushupCount + 1);
+    const newPushupCount = pushupCount + 1;
+    setPushupCount(newPushupCount);
+
+    // Fetch a new quote every 5 pushups
+    if (newPushupCount % 5 === 0) {
+      fetchQuote();
+    }
+
+    // Trigger confetti every 10 pushups
+    if (newPushupCount % 10 === 0) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
 
     // Start the animation: change state to 'down'
     setPushupState('down');
@@ -133,7 +168,7 @@ export function JamesPage() {
 
       <main className="pure-u-1 content" style={{ textAlign: 'center', marginTop: '20px' }}>
         <h1>Welcome, James!</h1>
-        <p>Time to get those pushups in!</p>
+        <p>{quote || 'Loading quote...'}</p>
 
         {/* Button to do a pushup - disabled when isAnimating is true */}
         <button

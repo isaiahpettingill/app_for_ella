@@ -30,6 +30,9 @@ importers:
       '@preact/preset-vite':
         specifier: ^2.9.3
         version: 2.10.1(@babel/core@7.27.1)(preact@10.26.6)(vite@6.3.5)
+      '@types/canvas-confetti':
+        specifier: ^1.9.0
+        version: 1.9.0
       eslint:
         specifier: ^9.26.0
         version: 9.26.0
@@ -515,6 +518,9 @@ packages:
     resolution: {integrity: sha512-bwspbWB04XJpeElvsp+DCylKfF4trJDa2Y9Go8O6A7YLX2LIKGcNK/CYImJN6ZP4DcuOHB4Utl3iCbnR62DudA==}
     cpu: [x64]
     os: [win32]
+
+  '@types/canvas-confetti@1.9.0':
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
 
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
@@ -2139,6 +2145,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.40.2':
     optional: true
+
+  '@types/canvas-confetti@1.9.0': {}
 
   '@types/estree@1.0.7': {}
 

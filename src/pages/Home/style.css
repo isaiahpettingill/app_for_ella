@@ -8,6 +8,10 @@
   padding: 20px;
   box-sizing: border-box;
   overflow-x: hidden; /* Add this to explicitly hide horizontal overflow */
+  font-family: Arial, sans-serif;
+  background-color: #fde4ec; /* Light pink background */
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  color: #333; /* Default text color */
 }
 
 .home-container h1,
@@ -22,6 +26,17 @@
 .home-container .header {
   text-align: center;
   padding: 10px 0;
+  background-color: #c2185b; /* Darker pink for header */
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 2em;
+  color: white; /* Ensure all text within header h2 is white */
 }
 
 /* Style the button to fit the pink theme */
@@ -44,6 +59,7 @@
 .home-container .image-container {
   text-align: center; /* Centers inline/inline-block children */
   margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 /* --- NEW STYLE FOR THE IMAGE --- */
@@ -52,6 +68,10 @@
   height: auto;     /* Maintain aspect ratio */
   display: block;   /* Treat image as a block element */
   margin: 0 auto;   /* Center the block image horizontally */
+  max-width: 300px; /* Limit unicorn size */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Added this rule just in case the specific Ella message div causes issues */
@@ -59,4 +79,90 @@
     /* Ensure any nested divs also don't exceed container width */
     max-width: 100%;
     box-sizing: border-box; /* Include padding/border in width */
+}
+
+/* New styles for rainbow text and animation */
+.rainbow-text {
+  background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red, violet);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-flow 5s linear infinite;
+  display: inline-block; /* Important for background-clip and transform */
+  font-weight: bold; /* Make it stand out a bit more */
+}
+
+@keyframes rainbow-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; } /* Increased to make the flow more noticeable */
+}
+
+.adjective-animate {
+  animation: grow-and-bounce 0.7s ease-out;
+  display: inline-block; /* Ensure transform applies correctly */
+}
+
+@keyframes grow-and-bounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.6) rotate(-8deg);
+  }
+  60% {
+    transform: scale(1.3) rotate(5deg);
+  }
+  100% {
+    transform: scale(1.5) rotate(0deg);
+  }
+}
+
+/* New Animation: Shake */
+.adjective-shake {
+  animation: shake-animation 0.5s ease-in-out;
+  display: inline-block;
+}
+
+@keyframes shake-animation {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px) rotate(-2deg); }
+  20%, 40%, 60%, 80% { transform: translateX(8px) rotate(2deg); }
+}
+
+/* New Animation: Pulse */
+.adjective-pulse {
+  animation: pulse-animation 0.7s ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pulse-animation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.content {
+  background-color: #ffffff; /* White background for content area */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Styling for the subtle James Mode link */
+.james-mode-link {
+  font-size: 0.9em;
+  color: #e91e63; /* Using a theme pink, but could be made less prominent if needed */
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.james-mode-link:hover,
+.james-mode-link:focus {
+  color: #c2185b; /* Darker pink on hover/focus */
+  text-decoration: underline;
+  background-color: #fde4ec; /* Light pink background on hover */
 }
