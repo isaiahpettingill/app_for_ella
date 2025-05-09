@@ -1,13 +1,9 @@
-import { useState } from 'preact/hooks';
-
 export function Home() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div class="counter">
-      <div class="count-display">You have pushed the button this many times:</div>
-      <div class="count-value">{count}</div>
-      <button aria-label="Increment counter" onClick={() => setCount(count + 1)}>+</button>
-    </div>
+    <>
+      <h1>Welcome to Pico.css + Preact</h1>
+      <p>Pico.css is a simple, lightweight, and minimal CSS framework.</p>
+      <button>Learn more</button>
+    </>
   );
 }

@@ -8,7 +8,7 @@ import './style.css';
 export function App() {
   return (
     <LocationProvider>
-      <main>
+      <main class="container">
         <Router>
           <Route path="/" component={Home} />
           <Route default component={NotFound} />
