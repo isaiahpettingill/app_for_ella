@@ -7,9 +7,7 @@ export function Home() {
     <div class="counter">
       <div class="count-display">You have pushed the button this many times:</div>
       <div class="count-value">{count}</div>
-      <button class="floating-action-button" onClick={() => setCount(count + 1)}>
-        +
-      </button>
+      <button aria-label="Increment counter" onClick={() => setCount(count + 1)}>+</button>
     </div>
   );
 }

@@ -17,33 +17,10 @@
   font-weight: bold;
 }
 
-.floating-action-button {
+button {
   position: absolute;
   bottom: 2rem;
   right: 2rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
   font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
-}
-
-.floating-action-button:hover {
-  background-color: #3e8e41;
-}
-
-@media (prefers-color-scheme: dark) {
-  .floating-action-button {
-    background-color: #8BC34A;
-  }
-  .floating-action-button:hover {
-    background-color: #7CB342;
-  }
+  padding: 1rem;
 }
