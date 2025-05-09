@@ -8,12 +8,12 @@ import './style.css';
 export function App() {
   return (
     <LocationProvider>
-      <Router>
-        <main class="container-fluid">
+      <main className="container-fluid">
+        <Router>
           <Route path="/" component={Home} />
           <Route default component={NotFound} />
-        </main>
-      </Router>
+        </Router>
+      </main>
     </LocationProvider>
   );
 }
