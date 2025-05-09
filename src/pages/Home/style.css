@@ -11,3 +11,12 @@ button {
   font-size: 1rem;
   padding: 1rem;
 }
+
+@media (max-width: 768px) {
+  .row-layout {
+    flex-direction: column;
+  }
+  button {
+    width: 100%;
+  }
+}
