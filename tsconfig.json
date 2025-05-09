@@ -5,7 +5,9 @@
 		"moduleResolution": "bundler",
 		"noEmit": true,
 		"allowJs": true,
-		"checkJs": true,
+		"checkJs": false,
+		"allowArbitraryExtensions": true,
+		"allowImportingTsExtensions": true,
 
 		/* Preact Config */
 		"jsx": "react-jsx",

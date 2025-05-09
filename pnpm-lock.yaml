@@ -20,9 +20,12 @@ importers:
       preact-iso:
         specifier: ^2.9.1
         version: 2.9.1(preact-render-to-string@6.5.13(preact@10.26.6))(preact@10.26.6)
-      remix:
-        specifier: ^2.16.6
-        version: 2.16.6
+      preact-router:
+        specifier: ^4.1.2
+        version: 4.1.2(preact@10.26.6)
+      purecss:
+        specifier: ^3.0.0
+        version: 3.0.0
     devDependencies:
       '@preact/preset-vite':
         specifier: ^2.9.3
@@ -1381,6 +1384,11 @@ packages:
     peerDependencies:
       preact: '>=10'
 
+  preact-router@4.1.2:
+    resolution: {integrity: sha512-uICUaUFYh+XQ+6vZtQn1q+X6rSqwq+zorWOCLWPF5FAsQh3EJ+RsDQ9Ee+fjk545YWQHfUxhrBAaemfxEnMOUg==}
+    peerDependencies:
+      preact: '>=10'
+
   preact@10.26.6:
     resolution: {integrity: sha512-5SRRBinwpwkaD+OqlBDeITlRgvd8I8QlxHJw9AxSdMNV6O+LodN9nUyYGpSF7sadHjs6RzeFShMexC6DbtWr9g==}
 
@@ -1398,6 +1406,9 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
+
+  purecss@3.0.0:
+    resolution: {integrity: sha512-IdYbGwbmuA7Hy9ACIO1q7ks4xGLcJSVHxJT2BXIz2c4Ve1aSrNU5bAzA1ILT4Gmdy5K59ruWoRPf9WvJZU5fbA==}
 
   qs@6.14.0:
     resolution: {integrity: sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==}
@@ -1421,10 +1432,6 @@ packages:
   regexp.prototype.flags@1.5.4:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
-
-  remix@2.16.6:
-    resolution: {integrity: sha512-Gj/lPA+4voULxJpheBjB+B18uaYEjx5Q9V7IcJCmPhSHkmeoRwOdCjKugIRLfjUhwodnT4ZaOYfIkHycIDtkLw==}
-    engines: {node: '>=18.0.0'}
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -3181,6 +3188,10 @@ snapshots:
     dependencies:
       preact: 10.26.6
 
+  preact-router@4.1.2(preact@10.26.6):
+    dependencies:
+      preact: 10.26.6
+
   preact@10.26.6: {}
 
   prelude-ls@1.2.1: {}
@@ -3197,6 +3208,8 @@ snapshots:
       ipaddr.js: 1.9.1
 
   punycode@2.3.1: {}
+
+  purecss@3.0.0: {}
 
   qs@6.14.0:
     dependencies:
@@ -3232,8 +3245,6 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       set-function-name: 2.0.2
-
-  remix@2.16.6: {}
 
   resolve-from@4.0.0: {}
 

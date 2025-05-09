@@ -4,6 +4,19 @@ import { LocationProvider, Router, Route } from 'preact-iso';
 import { Home } from './pages/Home/index.tsx';
 import { NotFound } from './pages/_404.tsx';
 import './style.css';
+import { JamesPage } from './pages/Home/JamesPage.tsx';
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker registered:', registration.scope);
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
 
 export function App() {
   return (
@@ -12,7 +25,8 @@ export function App() {
         <div className="pure-u-1">
           <Router>
             <Route path="/" component={Home} />
-            <Route default component={NotFound} />
+            <Route path="/James" component={JamesPage} />
+            <Route default component={Home} />
           </Router>
         </div>
       </div>
