@@ -4,7 +4,7 @@ import { route } from 'preact-router';
 import { Home } from './pages/Home/index.tsx';
 import { JamesPage } from './pages/JamesPage.tsx';
 import { MobileOS } from './pages/Apps/MobileOS.tsx';
-import { WeatherPage } from './pages/WeatherPage.tsx';
+import { WeatherPage } from './pages/Weather/WeatherPage.tsx';
 import Bees from './pages/Apps/Bees.tsx';
 import { ArrowUturnLeftIcon, HomeIcon as HeroHomeIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
