@@ -108,12 +108,14 @@ export function Home() {
         </button>
       </main>
 
-      {/* Footer section for James Mode link */}
+      {/* Footer section for James Mode link - REMOVED */}
+      {/* 
       <footer className="pure-u-1" style={{ textAlign: 'center', padding: '20px 0' }}>
         <a href="/James" className="james-mode-link">
           James Mode
         </a>
       </footer>
+      */}
     </div>
   );
 }

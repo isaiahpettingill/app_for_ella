@@ -5,3 +5,51 @@ body {
 .pure-g {
   height: 100%;
 }
+
+/* Global Mobile Nav Bar Styles */
+.mobile-nav-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.9); /* Slightly more opaque */
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+  position: fixed; /* Stick to viewport */
+  bottom: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.mobile-nav-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.mobile-nav-button svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Ensure the main app container allows the nav bar to sit at the bottom */
+.main-app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Removed padding-bottom if it was here; handled by content-wrap */
+}
+
+.content-wrap {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 60px; /* Add padding to prevent overlap with fixed nav bar. Adjust if nav bar height changes. */
+}

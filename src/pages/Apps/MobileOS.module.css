@@ -1,0 +1,147 @@
+.container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../assets/duck.jpg'); /* Updated background */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  /* overflow: hidden; No longer needed here as content-wrap handles main page scroll */
+  position: relative;
+  /* Add padding to account for fixed top bar and global fixed bottom nav */
+  /* Assuming topBar is ~40px and bottomNav is ~60px */
+  /* padding-top: 40px; This will be handled by swipeableArea margin/padding */
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.7); /* Made it a bit more opaque like bottom bar */
+  font-size: 0.9em;
+  position: fixed; /* Stick to top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 900; /* Below global nav bar but above other content */
+  box-sizing: border-box;
+}
+
+.time {
+  /* styles for time - can be kept minimal or expanded */
+}
+
+.batteryStatus {
+  display: flex;
+  align-items: center;
+}
+
+.batteryStatus svg {
+  margin-left: 5px;
+}
+
+.swipeableArea {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* This will clip appGrid if it overflows, making it static */
+  will-change: transform;
+  margin-top: 50px;
+}
+
+.appGrid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px 10px;
+  padding: 8px;
+  justify-items: center;
+  align-items: start; /* Changed from start to stretch if content is smaller than cell */
+  /* overflow-y: auto; Ensure this is removed or commented */
+  /* transform-origin: center center; Might be useful if scaling is added */
+  /* will-change: transform; Already on swipeableArea, but can be on appGrid too if it moves */
+  will-change: transform;
+  touch-action: none; /* Prevent default touch actions like scrolling on this element */
+  /* cursor: grab; Set by JS now */
+  /* Ensure appGrid itself can be a target for pointer events and fill its parent */
+  width: 100%;
+  height: 100%; /* Ensure it fills swipeableArea if its content is smaller */
+}
+
+.appIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-size: 0.65em; /* Reduced font size for app names */
+  width: 100%;
+  cursor: pointer;
+  padding: 2px 0; /* Reduced internal padding */
+}
+
+.appImageContainer {
+  width: 68%; /* Reduced width (was 75%) */
+  aspect-ratio: 1 / 1;
+  border-radius: 22%;
+  margin-bottom: 3px; /* Reduced margin (was 5px) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFD1DC;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.appImageContainer img,
+.appImageContainer svg {
+  width: 60%; 
+  height: 60%;
+  object-fit: contain;
+}
+
+.heroIcon {
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+.appImage {
+  width: 68%; /* Reduced width (was 75%) */
+  aspect-ratio: 1 / 1;
+  border-radius: 22%;
+  margin-bottom: 3px; /* Reduced margin (was 5px) */
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.homeAppIconBackground {
+  background-color: #FFD1DC !important; /* Ensures pink for Ella's app (StarIcon) */
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.7); /* More opaque */
+  width: 100%;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.navButton svg {
+  width: 24px;
+  height: 24px;
+} 

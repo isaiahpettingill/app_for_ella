@@ -158,13 +158,14 @@ export function JamesPage() {
         <h2 style={{ color: 'white' }}>James Mode</h2>
       </header>
 
-      {/* Add a button to navigate back to Ella Mode */}
+      {/* Add a button to navigate back to Ella Mode - REMOVED */}
+      {/* 
       <div className="pure-u-1" style={{ textAlign: 'center', margin: '10px 0' }}>
-         <button className="pure-button" onClick={navigateToEllaMode} style={{ backgroundColor: '#673ab7', color: 'white' }}> {/* Indigo purple button */}
+         <button className="pure-button" onClick={navigateToEllaMode} style={{ backgroundColor: '#673ab7', color: 'white' }}> 
            Back to Ella Mode
          </button>
       </div>
-
+      */}
 
       <main className="pure-u-1 content" style={{ textAlign: 'center', marginTop: '20px' }}>
         <h1>Welcome, James!</h1>
