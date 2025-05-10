@@ -12,6 +12,16 @@ const adjectives = [
   "spectacular", "splendid", "superb", "talented", "terrific", "vibrant", "wise", "witty", 'cute', 'sweet'
 ];
 
+// Function to shuffle an array (Fisher-Yates shuffle)
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const newArray = [...array]; // Create a copy to avoid mutating the original constant
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // Swap elements
+  }
+  return newArray;
+};
+
 // Added more heart emojis
 const emojiList = ['💖', '❤️', '💕', '💗', '💓', '💞', '💜', '💙', '💚', '💛', '🤟', '😊', '✨', '☀️', '🌞', '🌈', '💐', '🌷', '🪻', '🎉', '🤡', '🦄', '🦆', '🥭', '🍓', '🤩', '🌟', '🦦', '🫶'];
 const animationClasses = ['adjective-animate', 'adjective-shake', 'adjective-pulse'];
@@ -31,6 +41,8 @@ export function Home() {
     return []; // Fallback if shapeFromText is not available
   }, []);
 
+  // Shuffle adjectives on component mount and store the shuffled array
+  const shuffledAdjectives = useMemo(() => shuffleArray(adjectives), []);
 
   // Function to trigger confetti
   const shootConfetti = () => {
@@ -38,8 +50,8 @@ export function Home() {
     setConfettiClickCount(newClickCount);
 
     if (newClickCount > 0 && newClickCount % 10 === 0) {
-      const nextAdjectiveIndex = Math.floor(newClickCount / 10) % adjectives.length;
-      setCurrentAdjective(adjectives[nextAdjectiveIndex]);
+      const nextAdjectiveIndex = Math.floor(newClickCount / 10) % shuffledAdjectives.length;
+      setCurrentAdjective(shuffledAdjectives[nextAdjectiveIndex]);
     }
 
     if (newClickCount > 0 && newClickCount % 7 === 0) {
@@ -73,6 +85,13 @@ export function Home() {
 
   // This class is now only for the paragraph's adjective
   const paragraphAdjectiveSpanClass = animateAdjective ? `rainbow-text ${currentAnimationClass}` : '';
+
+  // Set the initial adjective from the shuffled list
+  useState(() => {
+    if (shuffledAdjectives.length > 0) {
+      setCurrentAdjective(shuffledAdjectives[0]);
+    }
+  });
 
   return (
     <div className="pure-g home-container">
