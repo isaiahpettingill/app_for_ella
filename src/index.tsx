@@ -5,6 +5,7 @@ import { Home } from './pages/Home/index.tsx';
 import { JamesPage } from './pages/JamesPage.tsx';
 import { MobileOS } from './pages/Apps/MobileOS.tsx';
 import { WeatherPage } from './pages/WeatherPage.tsx';
+import Bees from './pages/Apps/Bees.tsx';
 import { ArrowUturnLeftIcon, HomeIcon as HeroHomeIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
 import './style.css';
@@ -25,6 +26,7 @@ export function App() {
             <Route path="/James" component={JamesPage} />
             <Route path="/mobile" component={MobileOS} />
             <Route path="/weather" component={WeatherPage} />
+            <Route path="/bees" component={Bees} />
             <Route default component={Home} />
           </Router>
         </div>

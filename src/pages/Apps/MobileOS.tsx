@@ -3,9 +3,6 @@ import { route } from 'preact-router';
 import { useEffect, useState, useRef } from 'preact/hooks';
 import styles from './MobileOS.module.css'; // Import CSS Modules
 import {
-  // ArrowUturnLeftIcon, // Will be moved to global nav
-  // HomeIcon as HeroHomeIcon, // Will be moved to global nav
-  // Squares2X2Icon, // Will be moved to global nav
   Battery100Icon 
 } from '@heroicons/react/24/outline';
 
@@ -49,6 +46,7 @@ const apps: AppDefinition[] = [
   { name: 'James Fitness', icon: pushupIconSrc, iconType: 'image', link: '/James' },
   { name: 'Weather', icon: CloudIcon, iconType: 'heroicon', link: '/weather' },
   { name: 'Maps', icon: HeroMapIcon, iconType: 'heroicon', link: 'https://maps.google.com' },
+  { name: 'Bee', icon: () => <span style={{fontSize: '2em'}} role="img" aria-label="bee">🐝</span>, iconType: 'heroicon', link: '/bees' },
 ];
 
 const SWIPE_RESISTANCE = 3;
