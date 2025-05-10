@@ -40,7 +40,7 @@ interface AppDefinition {
 
 const apps: AppDefinition[] = [
   { name: 'Photos', icon: PhotoIcon, iconType: 'heroicon', link: '#' },
-  { name: 'Mail', icon: EnvelopeIcon, iconType: 'heroicon', link: '#' },
+  { name: 'Mail', icon: EnvelopeIcon, iconType: 'heroicon', link: '/mail' },
   { name: 'Calendar', icon: CalendarIcon, iconType: 'heroicon', link: '#' },
   { name: "Ella's App", icon: StarIcon, iconType: 'heroicon', link: '/', isSpecial: true },
   { name: 'Settings', icon: Cog6ToothIcon, iconType: 'heroicon', link: '#' },
