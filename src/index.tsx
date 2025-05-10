@@ -9,6 +9,7 @@ import Bees from './pages/Apps/Bees.tsx';
 import { ArrowUturnLeftIcon, HomeIcon as HeroHomeIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
 import './style.css';
+import { Mail } from './pages/Mail/Mail.tsx';
 
 export function App() {
   const goBack = () => window.history.back();
@@ -25,6 +26,7 @@ export function App() {
             <Route path="/" component={Home} />
             <Route path="/James" component={JamesPage} />
             <Route path="/mobile" component={MobileOS} />
+            <Route path="/mail" component={Mail} />
             <Route path="/weather" component={WeatherPage} />
             <Route path="/bees" component={Bees} />
             <Route default component={Home} />

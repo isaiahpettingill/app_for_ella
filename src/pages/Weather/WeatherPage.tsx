@@ -1,6 +1,11 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import styles from './WeatherPage.module.css';
+import unicornGif from '../../assets/unicorn.gif';
+import sunGif from '../../assets/sun.gif';
+import snowGif from '../../assets/snow.gif';
+import rainGif from '../../assets/rain.gif';
+import cloudsGif from '../../assets/clouds.gif';
 
 const DEFAULT_LOCATION = { lat: 43.826, lon: -111.7897, name: 'Rexburg, Idaho' };
 
@@ -37,11 +42,30 @@ const weatherThresholds = [
   }
 ];
 
+const weatherGifs = {
+  rain: rainGif,
+  snow: snowGif,
+  wind: null, // Add a wind gif here if available
+  sun: sunGif, // Use sun.gif for sunny/clear
+  cloud: cloudsGif,
+  default: unicornGif, // fallback to unicorn for default
+};
+
 function getWeatherSummary(data) {
   for (const t of weatherThresholds) {
     if (t.check(data)) return t.summary;
   }
   return weatherThresholds[weatherThresholds.length - 1].summary;
+}
+
+function getWeatherType(data) {
+  if (!data) return 'default';
+  if ((data.precipitation ?? 0) > 0.1) return 'rain';
+  if ((data.snowfall ?? 0) > 0.1) return 'snow';
+  if ((data.windSpeed ?? 0) > 30) return 'wind';
+  if (data.weatherCode === 0) return 'sun';
+  if ([1,2,3].includes(data.weatherCode)) return 'cloud';
+  return 'default';
 }
 
 export const WeatherPage = () => {
@@ -95,6 +119,8 @@ export const WeatherPage = () => {
   }, []);
 
   let summary = weather ? getWeatherSummary(weather) : '';
+  let gifType = weather ? getWeatherType(weather) : 'default';
+  let gifSrc = weatherGifs[gifType];
 
   return (
     <div className={styles.weatherContainer}>
@@ -112,6 +138,9 @@ export const WeatherPage = () => {
               <span>Snow: {weather.snowfall ? weather.snowfall.toFixed(1) : 0} mm</span>
             </div>
             <div className={styles.summary}>{summary}</div>
+            {gifSrc && (
+              <img src={gifSrc} alt={gifType + ' gif'} className={styles.weatherGif} />
+            )}
           </>
         )}
       </div>

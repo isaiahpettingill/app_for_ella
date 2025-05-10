@@ -73,6 +73,15 @@
   margin: 1.5em 0;
 }
 
+.weatherGif {
+  margin-top: 1.2em;
+  max-width: 180px;
+  width: 80%;
+  border-radius: 1em;
+  box-shadow: 0 2px 12px #0002;
+  display: block;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 1.2em 0.5em 1em 0.5em;

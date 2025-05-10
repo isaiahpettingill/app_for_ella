@@ -3,7 +3,7 @@ import { useRef, useState, useMemo } from 'preact/hooks';
 import beeImg from '../../assets/bee.jpg';
 import confetti from 'canvas-confetti';
 
-const beeEmojis = ['☀️', '🍯'];
+const beeEmojis = ['☀️', '🍯', '🌼', '🐝'];
 
 export default function Bees() {
   const imgRef = useRef<HTMLImageElement>(null);
