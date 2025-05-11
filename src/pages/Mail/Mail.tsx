@@ -4,6 +4,7 @@ import { supabase } from '../../api/supabase';
 import { Login } from '../../components/auth/Login';
 import { createMessage, updateMessage, deleteMessage } from '../../api/entities/message';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import styles from './Mail.module.css';
 import Toast from '../../components/common/Toast';
 
@@ -42,6 +43,7 @@ export function Mail() {
   useEffect(() => {
     if (!user) return;
     const fetchMessages = async () => {
+      setLoading(true);
       setError('');
       try {
         // Inbox: messages sent to this user
@@ -62,6 +64,8 @@ export function Mail() {
         setSent(sentData || []);
       } catch (e) {
         setError(e.message || 'Failed to load messages');
+      } finally {
+        setLoading(false);
       }
     };
     fetchMessages();
@@ -151,13 +155,54 @@ export function Mail() {
   // Reset page to 0 when inbox changes
   useEffect(() => { setPage(0); }, [inbox.length]);
 
+  // We need a stable fetchMessages function for the button, or call a wrapper.
+  // Let's define a specific handler for the refresh button.
+  const handleRefresh = async () => {
+    if (!user) return; // Should not happen if button is shown only when user is logged in
+    setLoading(true);
+    setError('');
+    try {
+      // Inbox: messages sent to this user
+      const { data: inboxData, error: inboxErr } = await supabase
+        .from('messages_isaiah_ella')
+        .select('*')
+        .eq('to_email', user.email)
+        .order('created_at', { ascending: false });
+      if (inboxErr) throw inboxErr;
+      setInbox(inboxData || []);
+      // Sent: messages sent by this user
+      const { data: sentData, error: sentErr } = await supabase
+        .from('messages_isaiah_ella')
+        .select('*')
+        .eq('from_email', user.email)
+        .order('created_at', { ascending: false });
+      if (sentErr) throw sentErr;
+      setSent(sentData || []);
+    } catch (e) {
+      setError(e.message || 'Failed to load messages');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!user) return <Login />;
 
   return (
     <div className={styles.mailApp}>
       <div className={styles.header}>
-        <span>📬 cutemail.com</span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <button 
+            onClick={handleRefresh} 
+            disabled={loading} 
+            className={styles.refreshBtn} 
+            aria-label="Refresh emails"
+            style={{ marginRight: '12px' }}
+          >
+            <ArrowPathIcon style={{ width: 20, height: 20 }} className={loading ? styles.loadingIcon : ''} />
+          </button>
+          <span>📬 cutemail.com</span>
+        </div>
         <button className={styles.composeBtn} onClick={openCompose}>+</button>
       </div>
       <ul className={styles.inboxList}>
@@ -172,8 +217,11 @@ export function Mail() {
             onTouchEnd={() => handleTouchEnd(msg.id)}
             onClick={() => handleOpenMessage(msg)}
           >
-            <span className={styles.from}>{msg.from_email}</span>
-            <span className={styles.subject}>{msg.subject}</span>
+            <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, overflow: 'hidden' }}>
+              {!msg.read && <span className={styles.unreadDot} aria-label="Unread message"></span>}
+              <span className={styles.from}>{msg.from_email}</span>
+              <span className={styles.subject}>{msg.subject}</span>
+            </div>
             <span className={styles.time}>{new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             {swipeStates[msg.id]?.x < -40 && (
               <span className={styles.swipeDelete}>Delete</span>

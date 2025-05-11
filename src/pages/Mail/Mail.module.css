@@ -337,4 +337,53 @@
   .composeContent {
     max-width: 700px;
   }
+}
+
+.refreshBtn {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.refreshBtn:hover {
+  background-color: #f0f0f0;
+  color: #222;
+}
+
+.refreshBtn:disabled {
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.refreshBtn:disabled:hover {
+  background-color: transparent;
+}
+
+.loadingIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.unreadDot {
+  width: 8px;
+  height: 8px;
+  background-color: #007bff; /* A common blue for unread indicators */
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0; /* Prevent dot from shrinking if space is tight */
 } 
