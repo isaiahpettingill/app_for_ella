@@ -13,8 +13,6 @@ export function Mail() {
   const [form, setForm] = useState({ to_email: '', subject: '', body: '' });
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
-  const [notification, setNotification] = useState('');
-  const notificationTimeout = useRef(null);
   const [viewing, setViewing] = useState(null);
   const [composeOpen, setComposeOpen] = useState(false);
   const [swipeStates, setSwipeStates] = useState({});
@@ -22,9 +20,10 @@ export function Mail() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
+    // Use getSession to persist login
     const getSession = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user || null);
+      const { data } = await supabase.auth.getSession();
+      setUser(data?.session?.user || null);
       setLoading(false);
     };
     getSession();
@@ -70,40 +69,6 @@ export function Mail() {
       Notification.requestPermission();
     }
   }, []);
-
-  useEffect(() => {
-    if (!user) return;
-    // Real-time subscription for new inbox messages
-    const channel = supabase.channel('inbox-messages')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'messages_isaiah_ella',
-          filter: `to_email=eq.${user.email}`,
-        },
-        (payload) => {
-          // Try native browser notification
-          if (window.Notification && Notification.permission === 'granted') {
-            new Notification('New message from ' + payload.new.from_email, {
-              body: payload.new.subject || 'No subject',
-            });
-          } else {
-            setNotification('New message received!');
-            // Auto-hide notification after 3 seconds
-            if (notificationTimeout.current) clearTimeout(notificationTimeout.current);
-            notificationTimeout.current = setTimeout(() => setNotification(''), 3000);
-          }
-          setInbox((prev) => [payload.new, ...prev]);
-        }
-      )
-      .subscribe();
-    return () => {
-      supabase.removeChannel(channel);
-      if (notificationTimeout.current) clearTimeout(notificationTimeout.current);
-    };
-  }, [user]);
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -188,7 +153,6 @@ export function Mail() {
         <span>📬 cutemail.com</span>
         <button className={styles.composeBtn} onClick={openCompose}>+</button>
       </div>
-      {notification && <div style={{ background: '#4e7', color: '#fff', padding: 10, borderRadius: 6, margin: 12, textAlign: 'center' }}>{notification}</div>}
       <ul className={styles.inboxList}>
         {paginatedInbox.length === 0 && <li style={{ color: '#bbb', padding: 24, textAlign: 'center' }}>No messages</li>}
         {paginatedInbox.map(msg => (
