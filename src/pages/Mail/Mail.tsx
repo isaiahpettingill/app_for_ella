@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from 'preact/hooks';
 import { supabase } from '../../api/supabase';
 import { Login } from '../../components/auth/Login';
 import { createMessage, updateMessage, deleteMessage } from '../../api/entities/message';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 import styles from './Mail.module.css';
+import Toast from '../../components/common/Toast';
 
 export function Mail() {
   const [user, setUser] = useState(null);
@@ -18,6 +20,8 @@ export function Mail() {
   const [swipeStates, setSwipeStates] = useState({});
   const MESSAGES_PER_PAGE = 8;
   const [page, setPage] = useState(0);
+  const [toastMessage, setToastMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     // Use getSession to persist login
@@ -87,7 +91,6 @@ export function Mail() {
         importance: 1,
         read: false,
       });
-    setForm({ to_email: '', subject: '', body: '' });
       // Refresh messages
       const { data: sentData } = await supabase
         .from('messages_isaiah_ella')
@@ -95,6 +98,10 @@ export function Mail() {
         .eq('from_email', user.email)
         .order('created_at', { ascending: false });
       setSent(sentData || []);
+      setForm({ to_email: '', subject: '', body: '' });
+      closeCompose();
+      setToastMessage('message sent! 💌');
+      setShowToast(true);
     } catch (e) {
       setError(e.message || 'Failed to send message');
     } finally {
@@ -191,37 +198,99 @@ export function Mail() {
         </div>
       )}
       {composeOpen && (
-        <div className={styles.composeModal} onClick={closeCompose}>
-          <div className={styles.composeContent} onClick={e => e.stopPropagation()}>
-            <form onSubmit={handleSend}>
+        <div className={styles.composeModal}>
+          <div className={styles.composeContent}>
+            <button
+              className={styles.closeBtn}
+              type="button"
+              onClick={closeCompose}
+              aria-label="Close compose window"
+              style={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                background: '#f0f0f0',
+                borderRadius: '50%',
+                width: 32,
+                height: 32,
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: 'none',
+                color: '#555',
+                zIndex: 10,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                padding: 0,
+              }}
+            >
+              <XMarkIcon style={{ width: 20, height: 20 }} />
+            </button>
+            <form onSubmit={handleSend} style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <label htmlFor="to_email" style={{ fontWeight: 500, marginBottom: 2 }}>To</label>
               <input
+                id="to_email"
                 name="to_email"
                 value={form.to_email}
                 onInput={handleChange}
-                placeholder="To (email)"
+                placeholder="Recipient's email"
                 required
                 autoFocus
+                style={{ marginBottom: 8 }}
               />
+              <label htmlFor="subject" style={{ fontWeight: 500, marginBottom: 2 }}>Subject</label>
               <input
+                id="subject"
                 name="subject"
                 value={form.subject}
                 onInput={handleChange}
                 placeholder="Subject"
                 required
+                style={{ marginBottom: 8 }}
               />
+              <label htmlFor="body" style={{ fontWeight: 500, marginBottom: 2 }}>Message</label>
               <textarea
+                id="body"
                 name="body"
                 value={form.body}
                 onInput={handleChange}
-                placeholder="Message body"
+                placeholder="Write your message..."
                 required
-                rows={5}
+                rows={8}
+                style={{ marginBottom: 8, minHeight: '120px' }}
               />
-              <button type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send'}</button>
+              {error && (
+                <div style={{ color: '#d32f2f', background: '#fff0f0', borderRadius: 6, padding: '8px 10px', marginBottom: 6, fontSize: '0.98rem', textAlign: 'center' }}>{error}</div>
+              )}
+              <button
+                type="submit"
+                disabled={sending}
+                style={{
+                  background: sending ? '#b2e5c2' : '#4e7',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  padding: '12px',
+                  marginTop: 4,
+                  boxShadow: sending ? 'none' : '0 2px 8px #0001',
+                  cursor: sending ? 'not-allowed' : 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                aria-busy={sending}
+              >
+                {sending ? 'Sending...' : 'Send'}
+              </button>
             </form>
           </div>
         </div>
       )}
+      <Toast 
+        message={toastMessage} 
+        show={showToast} 
+        onClose={() => setShowToast(false)} 
+      />
     </div>
   );
 }
