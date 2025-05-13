@@ -13,7 +13,7 @@ const weatherThresholds = [
   {
     type: 'rain',
     check: (data) => (data.precipitation ?? 0) > 0.1,
-    summary: "It's rainy! Perfect weather for cozying up with a book or splashing in puddles. 🌧️"
+    summary: "It's rainy! Perfect weather for the ducks or for jumping in puddles. 🌧️"
   },
   {
     type: 'snow',
@@ -23,7 +23,7 @@ const weatherThresholds = [
   {
     type: 'wind',
     check: (data) => (data.windSpeed ?? 0) > 30,
-    summary: "It's windy! Is that a song?. 💨"
+    summary: "It's windy! Your skills always blow me away. 💨"
   },
   {
     type: 'sun',

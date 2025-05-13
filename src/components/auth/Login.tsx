@@ -3,8 +3,11 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { supabase } from '../../api/supabase';
 import preactLogo from '../../assets/preact.svg';
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const GOOGLE_REDIRECT_URL = import.meta.env.VITE_GOOGLE_REDIRECT_URL;
+
+const GOOGLE_CLIENT_ID = (import.meta as any).env.VITE_GOOGLE_CLIENT_ID;
+
+
+const GOOGLE_REDIRECT_URL = (import.meta as any).env.VITE_GOOGLE_REDIRECT_URL;
 
 export function Login() {
   const googleDivRef = useRef<HTMLDivElement>(null);
