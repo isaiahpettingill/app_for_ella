@@ -1,0 +1,147 @@
+/* Notes.module.css - placeholder for Notes app styles */
+
+.notesApp {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #0070f3;
+  letter-spacing: 1px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 2px solid #eee;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: normal;
+  transition: border-bottom 0.2s, font-weight 0.2s;
+}
+
+.tabButtonActive {
+  border-bottom: 2px solid #0070f3;
+  font-weight: bold;
+}
+
+.notebookList,
+.noteList {
+  list-style: none;
+  padding: 0;
+}
+
+.notebookItem,
+.noteItem {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.notebookButton,
+.noteButton {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  text-align: left;
+  font-weight: normal;
+  transition: border 0.2s, background 0.2s, font-weight 0.2s;
+}
+
+.notebookButtonActive {
+  border: 2px solid #0070f3;
+  background: #f0f8ff;
+  font-weight: bold;
+}
+
+.noteButtonActive {
+  border: 2px solid #0070f3;
+  background: #e6f7ff;
+  font-weight: bold;
+}
+
+.deleteButton {
+  margin-left: 8px;
+  color: red;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.addButton,
+.saveButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.addButton:hover,
+.saveButton:hover {
+  background: #005bb5;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.noteEditContainer {
+  flex: 2;
+}
+
+.selectNoteText {
+  color: #888;
+  padding: 16px;
+}
+
+.error {
+  color: red;
+  margin-top: 8px;
+} 

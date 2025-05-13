@@ -5,11 +5,12 @@ import { Home } from './pages/Home/index.tsx';
 import { JamesPage } from './pages/JamesPage.tsx';
 import { MobileOS } from './pages/Apps/MobileOS.tsx';
 import { WeatherPage } from './pages/Weather/WeatherPage.tsx';
-import Bees from './pages/Apps/Bees.tsx';
+import Bees from './pages/Bee/Bees.tsx';
 import { ArrowUturnLeftIcon, HomeIcon as HeroHomeIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 
 import './style.css';
 import { Mail } from './pages/Mail/Mail.tsx';
+import { Notes } from './pages/Notes/Notes.tsx';
 
 export function App() {
   const goBack = () => window.history.back();
@@ -29,6 +30,7 @@ export function App() {
             <Route path="/mail" component={Mail} />
             <Route path="/weather" component={WeatherPage} />
             <Route path="/bees" component={Bees} />
+            <Route path="/notes" component={Notes} />
             <Route default component={Home} />
           </Router>
         </div>

@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRef, useState, useMemo } from 'preact/hooks';
+import { useRef, useState, useMemo, useEffect } from 'preact/hooks';
 import beeImg from '../../assets/bee.jpg';
 import confetti from 'canvas-confetti';
 
@@ -50,8 +50,39 @@ export default function Bees() {
     });
   };
 
+  // Prevent scrolling and optimize for mobile
+  useEffect(() => {
+    // Prevent scrolling on body
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    // Prevent touch move scroll
+    const preventDefault = (e: TouchEvent) => e.preventDefault();
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.removeEventListener('touchmove', preventDefault);
+    };
+  }, []);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', background: 'linear-gradient(to bottom, #87ceeb 0%, #b3e0ff 100%)' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        width: '100vw',
+        overflow: 'hidden',
+        background: 'linear-gradient(to bottom, #87ceeb 0%, #b3e0ff 100%)',
+        touchAction: 'none',
+        WebkitOverflowScrolling: 'auto',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        zIndex: 1
+      }}
+    >
       <h2 style={{ marginBottom: '1em', color: '#f9b000', textShadow: '1px 1px 8px #fff' }}>Pet a bee!</h2>
       <img
         ref={imgRef}

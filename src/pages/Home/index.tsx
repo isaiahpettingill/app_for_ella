@@ -1,16 +1,10 @@
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 // Remove the import for 'route' from 'preact-router'
 // import { route } from 'preact-router';
 import unicornGif from '../../assets/unicorn.gif';
 import './style.css'; // Import the CSS file
 import confetti from 'canvas-confetti'; // Import the confetti library
-
-const adjectives = [
-  "amazing", "beautiful", "the best", "kind", "wonderful", "skilled", "powerful", "strong", "gentle", "faithful",
-  "brilliant", "charming", "creative", "dazzling", "elegant", "energetic", "fabulous", "glorious", "graceful",
-  "impressive", "incredible", "magnificent", "marvelous", "outstanding", "phenomenal", "radiant", "remarkable",
-  "spectacular", "splendid", "superb", "talented", "terrific", "vibrant", "wise", "witty", 'cute', 'sweet'
-];
+import { useEllaAdjectives } from '../../api/hooks/useEllaAdjectives';
 
 // Function to shuffle an array (Fisher-Yates shuffle)
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -26,12 +20,13 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 const emojiList = ['💖', '❤️', '💕', '💗', '💓', '💞', '💜', '💙', '💚', '💛', '🤟', '😊', '✨', '☀️', '🌞', '🌈', '💐', '🌷', '🪻', '🎉', '🤡', '🦄', '🦆', '🥭', '🍓', '🤩', '🌟', '🦦', '🫶'];
 const animationClasses = ['adjective-animate', 'adjective-shake', 'adjective-pulse'];
 
-// We no longer need the onNavigateToJamesMode prop with preact-iso
 export function Home() {
-  const [currentAdjective, setCurrentAdjective] = useState(adjectives[0]);
+  const { adjectives, loading, error } = useEllaAdjectives();
+  const [currentAdjective, setCurrentAdjective] = useState(['', '']);
   const [confettiClickCount, setConfettiClickCount] = useState(0);
   const [animateAdjective, setAnimateAdjective] = useState(false);
   const [currentAnimationClass, setCurrentAnimationClass] = useState(animationClasses[0]);
+  const [unicornSpin, setUnicornSpin] = useState(false);
 
   // Memoize emoji shapes for confetti
   const emojiShapes = useMemo(() => {
@@ -42,12 +37,26 @@ export function Home() {
   }, []);
 
   // Shuffle adjectives on component mount and store the shuffled array
-  const shuffledAdjectives = useMemo(() => shuffleArray(adjectives), []);
+  const shuffledAdjectives = useMemo(() => {
+    if (!adjectives || adjectives.length === 0) return [];
+    return shuffleArray(adjectives.map(a => [a.adverb, a.adjective]));
+  }, [adjectives]);
+
+  // Set the initial adjective from the shuffled list when adjectives are loaded
+  useEffect(() => {
+    if (shuffledAdjectives.length > 0) {
+      setCurrentAdjective(shuffledAdjectives[0]);
+    }
+  }, [shuffledAdjectives]);
 
   // Function to trigger confetti
   const shootConfetti = () => {
     const newClickCount = confettiClickCount + 1;
     setConfettiClickCount(newClickCount);
+
+    if (newClickCount > 0 && newClickCount % 25 === 0) {
+      setUnicornSpin(true);
+    }
 
     if (newClickCount > 0 && newClickCount % 10 === 0) {
       const nextAdjectiveIndex = Math.floor(newClickCount / 10) % shuffledAdjectives.length;
@@ -83,15 +92,20 @@ export function Home() {
     }
   };
 
+  // Only animate the adjective (not the adverb)
+  const adverb = currentAdjective[0] ? currentAdjective[0] + ' ' : '';
+  const adjective = currentAdjective[1] || '';
+
   // This class is now only for the paragraph's adjective
   const paragraphAdjectiveSpanClass = animateAdjective ? `rainbow-text ${currentAnimationClass}` : '';
 
-  // Set the initial adjective from the shuffled list
-  useState(() => {
-    if (shuffledAdjectives.length > 0) {
-      setCurrentAdjective(shuffledAdjectives[0]);
-    }
-  });
+  if (loading) {
+    return <div className="home-container"><p>Loading adjectives...</p></div>;
+  }
+
+  if (error) {
+    return <div className="home-container"><p>Error loading adjectives: {error}</p></div>;
+  }
 
   return (
     <div className="pure-g home-container">
@@ -99,25 +113,30 @@ export function Home() {
       <header className="pure-u-1 header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px 20px' }}> {/* Centered header content */}
         <h2>
           Ella is {' '}
-          {/* Header adjective is now plain white, no special class or inline style needed here as h2 is white via CSS */}
           <span>
-            {currentAdjective}
+            {adjective}
           </span>
         </h2>
       </header>
 
       {/* Add a div to tell Ella how amazing she is */}
-      <div className="pure-u-1" style={{ textAlign: 'center', margin: '20px 0', fontSize: '1.2em' }}>
+      <div className="pure-u-1 ella-message" style={{ textAlign: 'center' }}>
          <p>
-           Seriously, Ella, you are absolutely {' '}
-           <span className={paragraphAdjectiveSpanClass}>
-             {currentAdjective}
+           Seriously, Ella, you are{' '}
+           <span>
+             {adverb}
+             <span className={paragraphAdjectiveSpanClass}>{adjective}</span>
            </span>!
          </p>
       </div>
 
       <div className="pure-u-1 image-container">
-          <img src={unicornGif} alt="Unicorn" />
+          <img
+            src={unicornGif}
+            alt="Unicorn"
+            className={unicornSpin ? 'unicorn-spin' : ''}
+            onAnimationEnd={() => setUnicornSpin(false)}
+          />
       </div>
 
       <main className="pure-u-1 content" style={{ textAlign: 'center' }}>
@@ -127,14 +146,6 @@ export function Home() {
         </button>
       </main>
 
-      {/* Footer section for James Mode link - REMOVED */}
-      {/* 
-      <footer className="pure-u-1" style={{ textAlign: 'center', padding: '20px 0' }}>
-        <a href="/James" className="james-mode-link">
-          James Mode
-        </a>
-      </footer>
-      */}
     </div>
   );
 }

@@ -37,6 +37,12 @@
   margin: 0;
   font-size: 2em;
   color: white; /* Ensure all text within header h2 is white */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  font-size: clamp(1em, 6vw, 2.5em);
 }
 
 /* Style the button to fit the pink theme */
@@ -165,4 +171,48 @@
   color: #c2185b; /* Darker pink on hover/focus */
   text-decoration: underline;
   background-color: #fde4ec; /* Light pink background on hover */
+}
+
+.ella-message {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+@keyframes unicorn-spin-loop {
+  0% { transform: translateX(0) scale(1) rotateY(0deg); opacity: 1; }
+  5% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  10% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  12.5% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  17.5% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  22.5% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  25% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  30% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  35% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  37.5% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  42.5% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  47.5% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  50% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  55% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  60% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  62.5% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  67.5% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  72.5% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  75% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  80% { transform: translateX(-120%) scale(0.7) rotateY(-90deg); opacity: 0; }
+  85% { transform: translateX(120%) scale(0.7) rotateY(-270deg); opacity: 0; }
+  87.5% { transform: translateX(0) scale(1) rotateY(-360deg); opacity: 1; }
+
+  100% { transform: translateX(0) scale(1) rotateY(0deg); opacity: 1; }
+}
+
+.unicorn-spin {
+  animation: unicorn-spin-loop 1.2s cubic-bezier(0.7, 0, 0.3, 1) 1;
+  will-change: transform, opacity;
 }

@@ -18,8 +18,11 @@ import {
 } from '@heroicons/react/24/solid';
 
 import pushupIconSrc from '../../assets/pushup.png'; // Import the image
-
-
+import ellaIconSrc from '../../assets/unicorn.png'; // Import the image
+import beeIconSrc from '../../assets/bee_app.png'; // Import the image
+import weatherIconSrc from '../../assets/weather.png'; // Import the image
+import mailIconSrc from '../../assets/mail.png'; // Import the image
+import duckNotesIconSrc from '../../assets/duck_notes.png'; // Import the Notes app icon
 // App definition type for better type safety
 type AppIconType = 'image' | 'heroicon' | 'invisible';
 interface AppDefinition {
@@ -31,16 +34,17 @@ interface AppDefinition {
 }
 
 const apps: AppDefinition[] = [
-    { name: 'Photos', icon: PhotoIcon, iconType: 'heroicon', link: 'https://photos.google.com' },
-    { name: 'Mail', icon: EnvelopeIcon, iconType: 'heroicon', link: '/mail' },
-    { name: "Ella's App", icon: StarIcon, iconType: 'heroicon', link: '/', isSpecial: true },
+    { name: 'Photos', icon: PhotoIcon, iconType: 'heroicon', link: '#' },
+    { name: 'Mail', icon: mailIconSrc, iconType: 'image', link: '/mail' },
+    { name: "Ella's App", icon: ellaIconSrc, iconType: 'image', link: '/', isSpecial: true },
     { name: 'Settings', icon: Cog6ToothIcon, iconType: 'heroicon', link: '#' },
     { name: 'James Fitness', icon: pushupIconSrc, iconType: 'image', link: '/James' },
-    { name: 'Bee', icon: () => (<span style={{ fontSize: '2em' }} role="img" aria-label="bee">🐝</span>), iconType: 'heroicon', link: '/bees' },
-    { name: 'Weather', icon: CloudIcon, iconType: 'heroicon', link: '/weather' },
+    { name: 'Bee', icon: beeIconSrc, iconType: 'image', link: '/bees' },
+    { name: 'Weather', icon: weatherIconSrc, iconType: 'image', link: '/weather' },
     { name: 'Maps', icon: HeroMapIcon, iconType: 'heroicon', link: 'https://maps.google.com' },
     { name: '', icon: () => <></>, iconType: 'invisible', link: '#' },
     { name: 'Calendar', icon: CalendarIcon, iconType: 'heroicon', link: '#' },
+    { name: 'Notes', icon: duckNotesIconSrc, iconType: 'image', link: '/notes' },
 ];
 
 
