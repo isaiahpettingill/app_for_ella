@@ -23,7 +23,7 @@ export async function createMessage(message: Omit<Message, 'id' | 'created_at'>)
   return data;
 }
 
-export async function getMessageById(id: number) {
+export async function getMessageById(id: string) {
   const { data, error } = await supabase
     .from(TABLE_NAME)
     .select('*')
@@ -42,7 +42,7 @@ export async function getAllMessages() {
   return data;
 }
 
-export async function updateMessage(id: number, updates: Partial<Omit<Message, 'id' | 'created_at'>>) {
+export async function updateMessage(id: string, updates: Partial<Omit<Message, 'id' | 'created_at'>>) {
   const { data, error } = await supabase
     .from(TABLE_NAME)
     .update(updates)
@@ -53,7 +53,7 @@ export async function updateMessage(id: number, updates: Partial<Omit<Message, '
   return data;
 }
 
-export async function deleteMessage(id: number) {
+export async function deleteMessage(id: string) {
   const { error } = await supabase
     .from(TABLE_NAME)
     .delete()
