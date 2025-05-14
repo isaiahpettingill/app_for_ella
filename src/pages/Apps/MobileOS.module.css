@@ -30,9 +30,6 @@
   box-sizing: border-box;
 }
 
-.time {
-  /* styles for time - can be kept minimal or expanded */
-}
 
 .batteryStatus {
   display: flex;

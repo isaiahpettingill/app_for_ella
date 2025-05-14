@@ -187,7 +187,7 @@ export function Mail() {
           >
             <ArrowPathIcon style={{ width: 20, height: 20 }} className={mailLoading ? styles.loadingIcon : ''} />
           </button>
-          <span className={styles.headerTitle}>📬 MyMail</span>
+          <span className={styles.headerTitle}>📬 cutemail.com </span>
         </div>
         <button className={styles.composeBtnFixed} onClick={() => setCurrentView('compose')} aria-label="Compose new email">
             <PencilSquareIcon style={{width: 24, height: 24}}/>
