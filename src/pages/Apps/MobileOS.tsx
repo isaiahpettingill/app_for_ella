@@ -8,13 +8,8 @@ import {
 
 import {
     PhotoIcon,
-    EnvelopeIcon,
-    CalendarIcon,
     Cog6ToothIcon,
-    PencilSquareIcon,
-    CloudIcon,
     MapIcon as HeroMapIcon, // Renamed to avoid conflict if we use a generic MapIcon name
-    StarIcon // Import StarIcon
 } from '@heroicons/react/24/solid';
 
 import pushupIconSrc from '../../assets/pushup.png'; // Import the image
@@ -23,6 +18,7 @@ import beeIconSrc from '../../assets/bee_app.png'; // Import the image
 import weatherIconSrc from '../../assets/weather.png'; // Import the image
 import mailIconSrc from '../../assets/mail.png'; // Import the image
 import duckNotesIconSrc from '../../assets/duck_notes.png'; // Import the Notes app icon
+import { CalendarIcon as SpecialCalendarIcon } from '../../components/calendar';
 // App definition type for better type safety
 type AppIconType = 'image' | 'heroicon' | 'invisible';
 interface AppDefinition {
@@ -43,7 +39,7 @@ const apps: AppDefinition[] = [
     { name: 'Weather', icon: weatherIconSrc, iconType: 'image', link: '/weather' },
     { name: 'Maps', icon: HeroMapIcon, iconType: 'heroicon', link: 'https://maps.google.com' },
     { name: '', icon: () => <></>, iconType: 'invisible', link: '#' },
-    { name: 'Calendar', icon: CalendarIcon, iconType: 'heroicon', link: '#' },
+    { name: 'Calendar', icon: () => <SpecialCalendarIcon />, iconType: 'heroicon', link: '#' },
     { name: 'Notes', icon: duckNotesIconSrc, iconType: 'image', link: '/notes' },
 ];
 

@@ -5,6 +5,8 @@ import unicornGif from '../../assets/unicorn.gif';
 import './style.css'; // Import the CSS file
 import confetti from 'canvas-confetti'; // Import the confetti library
 import { useEllaAdjectives } from '../../api/hooks/useEllaAdjectives';
+import { useMeetupDates } from '../../api/hooks/useMeetupDates';
+import { CalendarIcon } from '../../components/calendar/CalendarIcon';
 
 // Function to shuffle an array (Fisher-Yates shuffle)
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -22,6 +24,7 @@ const animationClasses = ['adjective-animate', 'adjective-shake', 'adjective-pul
 
 export function Home() {
   const { adjectives, loading, error } = useEllaAdjectives();
+  const { meetupDates, loading: meetupLoading, getMeetupDates } = useMeetupDates();
   const [currentAdjective, setCurrentAdjective] = useState(['', '']);
   const [confettiClickCount, setConfettiClickCount] = useState(0);
   const [animateAdjective, setAnimateAdjective] = useState(false);
