@@ -76,7 +76,7 @@
 /* Compose Button (Fixed for Inbox View) */
 .composeBtnFixed {
   position: fixed;
-  bottom: 20px;
+  bottom: 76px;
   right: 20px;
   background-color: #1a73e8; /* Gmail-like blue */
   color: white;
