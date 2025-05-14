@@ -102,6 +102,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  color: #555;
   flex-grow: 1;
   overflow-y: auto; /* Allow scrolling for messages */
 }
@@ -111,6 +112,7 @@
   align-items: center;
   padding: 12px 16px;
   border-bottom: 1px solid #eee;
+  color: #555;
   background-color: #fff;
   cursor: pointer;
   transition: transform 0.2s ease-out, background-color 0.1s;
@@ -118,10 +120,12 @@
 }
 .inboxItem:hover {
   background-color: #f5f5f5;
+  color: #555;
 }
 .inboxItem.unread {
   font-weight: bold;
-  background-color: #fefefe; /* Slightly different for unread */
+  background-color: #fefefe;
+  color: #555;  /* Slightly different for unread */
 }
 .inboxItem.read {
   color: #555;
@@ -354,12 +358,14 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+  color: #555;
   gap: 16px;
   flex-grow: 1; /* Takes available space */
 }
 
 .formGroup {
   display: flex;
+  color: #555;
   flex-direction: column;
 }
 .formGroup label {
@@ -375,6 +381,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #f5f5f5;
+  color: #555;
   font-size: 1rem;
   width: 100%; /* Ensure full width */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
@@ -383,11 +390,13 @@
 .formGroup textarea:focus {
   border-color: #1a73e8;
   outline: none;
+  color: #555;
   box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
 }
 .formGroup textarea {
   min-height: 150px;
   resize: vertical;
+  color: #555;
 }
 
 .composeError {
