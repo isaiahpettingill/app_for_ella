@@ -1,389 +1,421 @@
-:root {
-  color-scheme: light;
-}
+/* Mail.module.css - Additions/Modifications */
 
+/* General */
 .mailApp {
-  max-width: 100vw;
-  width: 100vw;
-  min-height: 100vh;
-  background: #f6f8fa;
-  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  max-width: 800px; /* Max width for larger screens */
+  margin: 0 auto;   /* Center the app */
+  height: 100vh;    /* Full viewport height */
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  background-color: #f9f9f9;
+  overflow: hidden; /* Prevent body scroll when app has its own scroll */
 }
 
-.header {
-  background: #fff;
-  padding: 16px 20px;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-bottom: 1px solid #eee;
+.loadingScreen {
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.errorBanner {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e57373;
+}
+
+/* Header */
+.header {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.inboxList {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: #f6f8fa;
-  box-sizing: border-box;
-  max-height: calc(8 * 72px); /* 8 messages max, each ~72px tall */
-  overflow-y: auto;
-  border-radius: 0;
-}
-
-.inboxItem {
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  padding: 12px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background 0.2s;
-  cursor: pointer;
-  position: relative;
-  touch-action: pan-y;
-  min-height: 56px;
-  box-sizing: border-box;
-}
-
-.inboxItem.unread {
-  font-weight: 700;
-  background: #eaf6ff;
-}
-
-.inboxItem.read {
-  font-weight: 400;
-  background: #fff;
-}
-
-.inboxItem .subject {
-  flex: 1;
-  margin-left: 12px;
-  color: #222;
-  font-size: 1.1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.inboxItem .from {
-  color: #888;
-  font-size: 0.95rem;
-  min-width: 70px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-right: 8px;
-}
-
-.inboxItem .time {
-  color: #bbb;
-  font-size: 0.9rem;
-  margin-left: 8px;
-  min-width: 50px;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.swipeDelete {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 80px;
-  background: #ff4e4e;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-  border-radius: 0 8px 8px 0;
-  z-index: 2;
-  transition: right 0.2s;
-}
-
-.messageView {
-  background: #fff;
-  padding: 24px 20px;
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 -2px 8px #0001;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  min-height: 60vh;
-  max-height: 90vh;
-  overflow-y: auto;
-  z-index: 10;
-  animation: slideUp 0.3s cubic-bezier(.4,1.4,.6,1) 1;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.closeBtn {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  background: none;
-  border: none;
-  font-size: 2.2rem;
-  color: #888;
-  cursor: pointer;
-  z-index: 2;
-  padding: 0 8px;
-  line-height: 1;
-  transition: color 0.2s;
-}
-
-.closeBtn:hover {
-  color: #222;
-}
-
-.composeBtn {
-  background: #4e7;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  box-shadow: 0 2px 8px #0002;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-left: auto;
-  position: static;
-}
-
-.composeBtn:active {
-  background: #388e3c;
-}
-
-.composeModal {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.18);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-.composeContent {
-  background: #fff;
-  width: 100vw;
-  max-width: 100vw;
-  border-radius: 0;
-  padding: calc(32px + env(safe-area-inset-top, 0px)) 16px calc(24px + env(safe-area-inset-bottom, 0px)) 16px;
-  box-shadow: none;
-  animation: none;
-  overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: auto;
-  max-height: 98vh;
-}
-
-.composeContent input,
-.composeContent textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #f9f9fc;
-  color: #222;
-  caret-color: #222;
-  resize: none;
-  line-height: 1.4;
-}
-
-.composeContent input::placeholder,
-.composeContent textarea::placeholder {
-  color: #888;
-  opacity: 1;
-}
-
-.composeContent input:focus,
-.composeContent textarea:focus {
-  outline: none;
-  border-color: #4e7bff;
-  box-shadow: 0 0 0 2px rgba(78, 123, 255, 0.2);
-}
-
-.composeContent button {
-  width: 100%;
-  padding: 12px;
-  background: #4e7;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+.headerTitle {
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-top: 8px;
-  transition: background 0.2s;
-}
-
-.composeContent button:active {
-  background: #388e3c;
-}
-
-@media (max-width: 600px) {
-  .mailApp {
-    border-radius: 0;
-    min-height: 100vh;
-    max-width: 100vw;
-    padding: 0;
-    margin: 0;
-  }
-  .header {
-    font-size: 1.1rem;
-    padding: 12px 15px;
-  }
-  .inboxList {
-    max-height: calc(8 * 64px);
-  }
-  .inboxItem {
-    padding: 10px 10px;
-    min-height: 48px;
-  }
-  .inboxItem .subject {
-    font-size: 1rem;
-    margin-left: 8px;
-  }
-  .inboxItem .from {
-    font-size: 0.9rem;
-    min-width: 60px;
-  }
-  .inboxItem .time {
-    font-size: 0.85rem;
-    min-width: 45px;
-  }
-  .messageView {
-    padding: 16px 8px;
-    min-height: 70vh;
-  }
-  .composeContent {
-    padding: calc(24px + env(safe-area-inset-top, 0px)) 12px calc(16px + env(safe-area-inset-bottom, 0px)) 12px;
-  }
-}
-
-@media (min-width: 600px) {
-  .composeContent {
-    width: 75vw;
-    max-width: 640px;
-    height: auto;
-    max-height: 98vh;
-    border-radius: 14px;
-    box-shadow: 0 4px 32px #0003;
-    animation: slideUp 0.2s cubic-bezier(.4,1.4,.6,1) 1;
-    padding: 32px 24px 24px 24px;
-  }
-}
-
-@media (min-width: 768px) {
-  .messageView {
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 700px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  }
-}
-
-@media (min-width: 1024px) {
-  .mailApp {
-    max-width: 900px;
-    margin: 0 auto;
-    box-shadow: 0 0 30px rgba(0,0,0,0.05);
-    border-left: 1px solid #e0e0e0;
-    border-right: 1px solid #e0e0e0;
-  }
-
-  .header {
-    padding: 20px 24px;
-    font-size: 1.5rem;
-  }
-
-  .composeModal {
-  }
-
-  .composeContent {
-    max-width: 700px;
-  }
+  color: #333;
 }
 
 .refreshBtn {
   background: none;
   border: none;
-  color: #555;
+  padding: 8px;
   cursor: pointer;
-  padding: 6px;
+  color: #555;
+  margin-right: 10px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s, color 0.2s;
 }
-
 .refreshBtn:hover {
   background-color: #f0f0f0;
-  color: #222;
 }
-
 .refreshBtn:disabled {
-  color: #bbb;
+  opacity: 0.5;
   cursor: not-allowed;
-}
-
-.refreshBtn:disabled:hover {
-  background-color: transparent;
 }
 
 .loadingIcon {
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Compose Button (Fixed for Inbox View) */
+.composeBtnFixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1a73e8; /* Gmail-like blue */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  z-index: 105; /* Above inbox list */
+  transition: background-color 0.2s ease;
+}
+.composeBtnFixed:hover {
+  background-color: #1558b0;
+}
+
+
+/* Inbox List */
+.inboxList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto; /* Allow scrolling for messages */
+}
+
+.inboxItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, background-color 0.1s;
+  position: relative; /* For swipe action indicator */
+}
+.inboxItem:hover {
+  background-color: #f5f5f5;
+}
+.inboxItem.unread {
+  font-weight: bold;
+  background-color: #fefefe; /* Slightly different for unread */
+}
+.inboxItem.read {
+  color: #555;
+}
+.inboxItem.read .from, .inboxItem.read .subject {
+ font-weight: normal;
+}
+.inboxItem.swipedOut {
+  /* Could add height: 0; opacity: 0; transition: all 0.3s ease; for a smoother removal animation */
+  /* transform: translateX(-100%) !important; /* Ensure it stays off-screen if needed */
+  /* For now, useMail hook filters it out, this class is for potential animation */
+}
+
+
+.messageContent {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden; /* Prevent long subjects from breaking layout */
+  white-space: nowrap;
 }
 
 .unreadDot {
-  width: 8px;
-  height: 8px;
-  background-color: #007bff; /* A common blue for unread indicators */
+  width: 10px;
+  height: 10px;
+  background-color: #1a73e8;
   border-radius: 50%;
   margin-right: 10px;
-  flex-shrink: 0; /* Prevent dot from shrinking if space is tight */
-} 
+  flex-shrink: 0;
+}
+
+.from {
+  font-weight: 600; /* Bold for unread, normal for read (see .read override) */
+  margin-right: 8px;
+  color: #333;
+  min-width: 100px; /* Adjust as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subject {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #444;
+}
+
+.time {
+  font-size: 0.85em;
+  color: #777;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.swipeActionIndicator {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  background-color: #d32f2f; /* Red for delete */
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none; /* So it doesn't interfere with touch events on the item */
+}
+
+
+.emptyInbox {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Pagination */
+.paginationControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+}
+.paginationControls button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+}
+.paginationControls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.paginationControls span {
+  color: #555;
+}
+
+
+/* Full Screen Message View */
+.messageViewFullScreen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+
+.messageViewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 8px;
+}
+.backButton:hover {
+  text-decoration: underline;
+}
+
+.deleteMessageButton {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.deleteMessageButton:hover {
+    background-color: #f0f0f0;
+}
+
+.messageViewContent {
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.messageDetailItem {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #555;
+}
+.messageDetailItem span {
+  font-weight: 500;
+  color: #333;
+  margin-right: 8px;
+}
+.messageDetailItem strong {
+  font-weight: 600;
+  color: #222;
+}
+
+.messageDivider {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+.messageBodyFull {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap; /* Preserve line breaks and spacing */
+  word-wrap: break-word;
+}
+
+.messageTimestampFull {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+
+/* Full Screen Compose Page */
+.composeFullScreen {
+  position: fixed; /* Or absolute if MailApp is the only thing on screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 200; /* Above everything else */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* In case content is too long */
+}
+
+.composeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5; /* Slight off-white */
+}
+.composeHeader h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.closeComposeFullScreenBtn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #555;
+}
+.closeComposeFullScreenBtn:hover {
+  color: #000;
+}
+
+.composeForm {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1; /* Takes available space */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+.formGroup label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #444;
+}
+.formGroup input[type="email"],
+.formGroup input[type="text"],
+.formGroup textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #1a73e8;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+.formGroup textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.composeError {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.sendButton {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: flex-start; /* Or stretch if you want full width */
+  margin-top: 10px;
+}
+.sendButton:hover {
+  background-color: #1558b0;
+}
+.sendButton:disabled {
+  background-color: #a0c3ff;
+  cursor: not-allowed;
+}
