@@ -130,7 +130,7 @@
  font-weight: normal;
 }
 .inboxItem.swipedOut {
-  /* Could add height: 0; opacity: 0; transition: all 0.3s ease; for a smoother removal animation */
+  height: 0; opacity: 0; transition: all 0.3s ease; 
   /* transform: translateX(-100%) !important; /* Ensure it stays off-screen if needed */
   /* For now, useMail hook filters it out, this class is for potential animation */
 }
