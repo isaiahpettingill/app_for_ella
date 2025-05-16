@@ -1,6 +1,7 @@
 // ../../routes/mail/Mail.tsx
 import { h, Fragment } from 'preact';
-import { useEffect, useState, useCallback } from 'preact/hooks';
+import { useEffect, useState, useCallback, useRef } from 'preact/hooks';
+import confetti from 'canvas-confetti';
 import { Login } from '../../components/auth/Login';
 import { ArrowPathIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/24/solid';
@@ -86,11 +87,33 @@ export function Mail() {
   };
 
   // --- Message Actions ---
+  // Function to extract emojis from text
+  const extractEmojis = (text: string): string[] => {
+    const emojiRegex = /[\p{Emoji}]/gu;
+    return [...new Set(text.match(emojiRegex) || [])];
+  };
+
   const handleOpenMessage = async (msg: Message) => {
     setViewingMessage(msg);
     setCurrentView('readMessage');
     if (!msg.read) {
       await markMessageAsRead(msg.id);
+    }
+    
+    // Trigger confetti with emojis from the email
+    const emojis = extractEmojis(msg.body);
+    if (emojis.length > 0) {
+      // Create emoji shapes for confetti
+      const emojiShapes = emojis.map(emoji => confetti.shapeFromText({ text: emoji, scalar: 2 }));
+      
+      // Launch confetti with emojis
+      confetti({
+        particleCount: 30 * emojis.length, // More particles for more emojis
+        spread: 100,
+        origin: { y: 0.6 },
+        shapes: emojiShapes,
+        scalar: 1.5
+      });
     }
   };
 
