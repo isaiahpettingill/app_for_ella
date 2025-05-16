@@ -1,6 +1,6 @@
 // ../../hooks/useMail.ts
 import { useState, useEffect, useCallback } from 'preact/hooks';
-import { supabase } from '../../api/supabase'; // Ensure User is importable
+import { supabase } from '../supabaseClient'; // Ensure User is importable
 import { createMessage, updateMessage as apiUpdateMessage, deleteMessage as apiDeleteMessage } from '../../api/entities/message';
 import { User } from '@supabase/supabase-js';
 

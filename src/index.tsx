@@ -11,6 +11,7 @@ import { ArrowUturnLeftIcon, HomeIcon as HeroHomeIcon, Squares2X2Icon } from '@h
 import './style.css';
 import { Mail } from './pages/Mail/Mail.tsx';
 import { Notes } from './pages/Notes/Notes.tsx';
+import Inchtogram from './pages/Inchtogram/Inchtogram.tsx';
 
 export function App() {
   const goBack = () => window.history.back();
@@ -31,6 +32,7 @@ export function App() {
             <Route path="/weather" component={WeatherPage} />
             <Route path="/bees" component={Bees} />
             <Route path="/notes" component={Notes} />
+            <Route path="/inchtogram" component={Inchtogram} />
             <Route default component={Home} />
           </Router>
         </div>

@@ -18,6 +18,7 @@ import beeIconSrc from '../../assets/bee_app.png'; // Import the image
 import weatherIconSrc from '../../assets/weather.png'; // Import the image
 import mailIconSrc from '../../assets/mail.png'; // Import the image
 import duckNotesIconSrc from '../../assets/duck_notes.png'; // Import the Notes app icon
+import inchtogramIconSrc from '../../assets/inchtogram.png'; // Import the Inchtogram app icon
 import { CalendarIcon as SpecialCalendarIcon } from '../../components/calendar';
 // App definition type for better type safety
 type AppIconType = 'image' | 'heroicon' | 'invisible';
@@ -41,6 +42,8 @@ const apps: AppDefinition[] = [
     { name: '', icon: () => <></>, iconType: 'invisible', link: '#' },
     { name: 'Calendar', icon: () => <SpecialCalendarIcon />, iconType: 'heroicon', link: '#' },
     { name: 'Notes', icon: duckNotesIconSrc, iconType: 'image', link: '/notes' },
+    { name: 'Inchtogram', icon: inchtogramIconSrc, iconType: 'image', link: '/inchtogram' },
+
 ];
 
 

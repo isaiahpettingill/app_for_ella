@@ -1,5 +1,10 @@
+:root {
+  color-scheme: only light;
+}
+
 body {
   margin: 0;
+  
 }
 
 .pure-g {

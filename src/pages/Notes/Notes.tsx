@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { supabase } from '../../api/supabase';
+import { supabase } from '../../api/supabaseClient';
 import { Login } from '../../components/auth/Login';
 import { useNotebooks } from '../../api/hooks/useNotebooks';
 import { useNotes } from '../../api/hooks/useNotes';

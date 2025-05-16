@@ -1,6 +1,6 @@
 // ../../hooks/useSupabaseAuth.ts
 import { useEffect, useState } from 'preact/hooks';
-import { supabase } from '../../api/supabase';
+import { supabase } from '../supabaseClient';
 import type { AuthChangeEvent, Session, User } from '@supabase/supabase-js'; // Explicit Supabase types
 
 export function useSupabaseAuth() {

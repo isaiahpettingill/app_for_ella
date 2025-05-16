@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'preact/hooks';
-import { supabase } from '../supabase';
+import { supabase } from '../supabaseClient';
 import { MeetupDate } from '../entities/meetup_date';
 
 const TABLE_NAME = 'meetup_dates_isaiah_ella';

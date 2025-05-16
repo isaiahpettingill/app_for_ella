@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'preact/hooks';
-import { supabase } from '../supabase';
+import { supabase } from '../supabaseClient';
 
 export interface NotebookIsaiahElla {
   readonly id: number;

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { supabase } from '../../api/supabase';
+import { supabase } from '../../api/supabaseClient';
 import preactLogo from '../../assets/preact.svg';
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { supabase } from '../supabase';
+import { supabase } from '../supabaseClient';
 import type { EllaAdjective } from '../entities/adjective';
 
 export function useEllaAdjectives() {
